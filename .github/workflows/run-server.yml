@@ -22,23 +22,14 @@ jobs:
         with:
           node-version: '20' # Bạn có thể đổi thành phiên bản Node bạn cần
 
-# Bước 3: Cài đặt các thư viện (Bao gồm cả devDependencies)
-      - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci --include=dev
-          else
-            npm install --include=dev
-          fi
-          
 # Bước 3: Cài đặt các thư viện thông thường
       - name: Install dependencies
         run: npm install
 
-      # Bước phụ: Cài bổ sung gói cứu cánh bị thiếu
+      # Bước phụ: Cài bổ sung gói chính xác của Vite plugin
       - name: Install missing Vite plugin
-        run: npm install @vitejs/react-refresh --no-save
+        run: npm install @vitejs/plugin-react-refresh --no-save
 
-      # Bước 4: Chạy file server.ts bằng npx tsx hoặc ts-node
+      # Bước 4: Chạy file server.ts
       - name: Run server.ts
         run: npx tsx server.ts
