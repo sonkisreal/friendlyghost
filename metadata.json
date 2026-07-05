@@ -1,0 +1,6 @@
+{
+  "name": "Friendly Ghost",
+  "description": "Cổng thông tin và công cụ hỗ trợ đối phó với nạn Bơ tin nhắn (Ghosting), giúp bạn lấy lại phong thái kiêu hãnh và rèn luyện kỹ năng giao tiếp văn minh.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
