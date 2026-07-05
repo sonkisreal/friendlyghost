@@ -19,9 +19,10 @@ jobs:
         with:
           node-version: '20'
 
+      # Cài đặt các package chuẩn có trong package.json của bạn
       - name: Install dependencies
         run: npm install
 
-      # Giải pháp quyết định: Thêm cờ --no-config để cô lập server.ts khỏi cấu hình Vite
+      # Chạy file bằng ts-node (bỏ qua kiểm tra lỗi ép kiểu cấu hình Vite nếu có)
       - name: Run server.ts
-        run: npx tsx --no-config server.ts
+        run: npx ts-node --transpile-only server.ts
