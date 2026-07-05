@@ -22,13 +22,13 @@ jobs:
         with:
           node-version: '20' # Bạn có thể đổi thành phiên bản Node bạn cần
 
-      # Bước 3: Cài đặt các thư viện (dependencies)
+# Bước 3: Cài đặt các thư viện (Bao gồm cả devDependencies)
       - name: Install dependencies
         run: |
           if [ -f package-lock.json ]; then
-            npm ci
+            npm ci --include=dev
           else
-            npm install
+            npm install --include=dev
           fi
 
       # Bước 4: Chạy file server.ts bằng npx tsx hoặc ts-node
