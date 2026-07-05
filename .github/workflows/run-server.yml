@@ -30,6 +30,6 @@ jobs:
       - name: Install missing Vite plugin
         run: npm install @vitejs/plugin-react-refresh --no-save
 
-      # Bước 4: Chạy file server.ts
+# Bước 4: Chạy server mà không load cấu hình Vite
       - name: Run server.ts
-        run: npx tsx server.ts
+        run: npx tsx --no-config server.ts
