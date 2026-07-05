@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/react-refresh' // hoặc vue, tùy framework bạn dùng
+import react from '@vitejs/react-refresh' // hoặc @vitejs/plugin-react tùy dự án của bạn
 
 export default defineConfig({
   plugins: [react()],
-  base: '/friendlyghost/', // <-- THÊM DÒNG NÀY (Nhớ có 2 dấu gạch chéo)
+  base: '/friendlyghost/', // <-- BẮT BUỘC PHẢI CÓ DÒNG NÀY (Có 2 dấu gạch chéo)
 })
