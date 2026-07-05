@@ -30,6 +30,14 @@ jobs:
           else
             npm install --include=dev
           fi
+          
+# Bước 3: Cài đặt các thư viện thông thường
+      - name: Install dependencies
+        run: npm install
+
+      # Bước phụ: Cài bổ sung gói cứu cánh bị thiếu
+      - name: Install missing Vite plugin
+        run: npm install @vitejs/react-refresh --no-save
 
       # Bước 4: Chạy file server.ts bằng npx tsx hoặc ts-node
       - name: Run server.ts
