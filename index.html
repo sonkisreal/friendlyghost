@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ghost</title>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      /* Custom animated entry transitions */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in-up {
+        animation: fadeInUp 0.5s ease-out forwards;
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-900 transition-colors duration-300 min-h-screen flex flex-col selection:bg-indigo-100 selection:text-indigo-900">
+    
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-100 transition-colors duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center space-x-2.5">
+          <span class="font-extrabold text-xl text-slate-800 tracking-tight font-sans">
+            ghost
+          </span>
+        </div>
+
+        <!-- Language Selector -->
+        <div class="flex items-center space-x-2 bg-slate-100 border border-slate-200/50 p-1 rounded-xl transition-colors duration-300">
+          <i data-lucide="globe" class="w-4 h-4 text-slate-400 ml-1.5 shrink-0"></i>
+          <button 
+            id="btn-lang-vi" 
+            onclick="setLanguage('vi')" 
+            class="px-3 py-1 text-xs font-semibold rounded-lg transition-all bg-white text-slate-800 shadow-sm cursor-pointer"
+          >
+            VI
+          </button>
+          <button 
+            id="btn-lang-en" 
+            onclick="setLanguage('en')" 
+            class="px-3 py-1 text-xs font-semibold rounded-lg transition-all text-slate-500 hover:text-slate-800 cursor-pointer"
+          >
+            EN
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- BANNER NOTICE -->
+    <div class="bg-amber-50 border-b border-amber-100/80 py-2 px-4 transition-colors duration-300">
+      <div class="max-w-7xl mx-auto flex items-center justify-center space-x-2 text-xs text-amber-800 font-medium">
+        <i data-lucide="info" class="w-3.5 h-3.5 shrink-0"></i>
+        <span id="txt-bannerNotice">Website này chỉ tham khảo, có thể không chính xác 100%!</span>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+      
+      <!-- HERO SECTION -->
+      <section class="text-center max-w-3xl mx-auto space-y-6 py-6 animate-fade-in-up">
+        <span class="inline-flex items-center space-x-1.5 px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-semibold rounded-full border border-indigo-100/50">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+          <span id="tag-hero">Friendly Communication Guide</span>
+        </span>
+        <h1 id="txt-heroTitle" class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-none sm:leading-tight">
+          Ghosting & Đọc đéo trả lời tin nhắn
+        </h1>
+        <p id="txt-heroSubtitle" class="text-base sm:text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed font-sans">
+          Bạn bị im lặng không một lý do? Đừng hoảng loạn hay đánh mất lòng tự tôn. Hãy ứng xử văn minh, khôn ngoan để làm chủ tâm lý của chính mình!
+        </p>
+      </section>
+
+      <!-- CONCEPT CARDS (Bento Grid) -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <!-- Card 1: What is ghosting -->
+        <div class="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="inline-flex p-3 bg-indigo-50 text-indigo-600 rounded-2xl">
+              <i data-lucide="help-circle" class="w-5 h-5"></i>
+            </span>
+            <h3 id="txt-aboutTitle" class="text-lg font-bold text-slate-800 tracking-tight">
+              Ghosting là gì?
+            </h3>
+            <p id="txt-aboutText" class="text-sm text-slate-500 leading-relaxed font-sans">
+              Ghosting là hành vi một người đột ngột cắt đứt mọi liên lạc (không trả lời tin nhắn, seen không rep, tắt trạng thái hoạt động hoặc âm thầm 'bỏ qua' cuộc trò chuyện) mà không đưa ra bất kỳ lý do hay lời giải thích nào. Hành vi này phản ánh sự thiếu trưởng thành trong kỹ năng giao tiếp và né tránh cảm xúc của đối phương, chứ không hề phản ánh giá trị bản thân của bạn.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2: Why it hurts -->
+        <div class="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="inline-flex p-3 bg-rose-50 text-rose-600 rounded-2xl">
+              <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+            </span>
+            <h3 id="txt-whyBadTitle" class="text-lg font-bold text-slate-800 tracking-tight">
+              Tại sao bị bơ tin nhắn lại gây lo âu cực độ?
+            </h3>
+            <ul id="list-whyBadPoints" class="space-y-3 font-sans">
+              <!-- Rendered via JS -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 3: Analogy -->
+        <div class="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="inline-flex p-3 bg-amber-50 text-amber-600 rounded-2xl">
+              <i data-lucide="key" class="w-5 h-5"></i>
+            </span>
+            <h3 id="txt-analogyTitle" class="text-lg font-bold text-slate-800 tracking-tight">
+              Phép so sánh
+            </h3>
+            <p id="txt-analogyDesc" class="text-sm text-slate-500 leading-relaxed font-sans">
+              Bơ tin nhắn cũng giống như việc ai đó đóng sầm cửa lại trước mặt bạn. Việc bạn tiếp tục đứng ngoài đập cửa, réo gọi chỉ làm bạn thêm mệt mỏi và biến bạn thành kẻ làm phiền. Quy tắc vàng khi bị ghosting là: Gõ cửa 1-2 lần lịch sự. Nếu họ không mở, hãy mỉm cười và kiêu hãnh quay lưng bước đi.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAT SIMULATOR SECTION -->
+      <section class="space-y-8 max-w-6xl mx-auto">
+        <div class="text-center space-y-2">
+          <span class="inline-flex items-center space-x-1 px-2.5 py-0.5 bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider rounded-md border border-slate-200/50" id="txt-comparisonBadge">
+            Interactive Simulator
+          </span>
+          <h2 id="txt-comparisonTitle" class="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
+            Phản ứng: Spam Tuyệt Vọng vs. Closure Lịch Lãm
+          </h2>
+          <p id="txt-comparisonDesc" class="text-slate-500 max-w-2xl mx-auto text-sm leading-relaxed font-sans">
+            Hãy mô phỏng và so sánh sự khác biệt lớn về tinh thần và vị thế của bạn sau 24 giờ bị đối phương 'Seen không rep'.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          
+          <!-- BAD FLOW -->
+          <div class="bg-white border border-slate-200/80 rounded-3xl p-5 shadow-sm flex flex-col h-[520px] transition-all relative overflow-hidden">
+            <!-- Header status bar -->
+            <div class="flex items-center justify-between pb-3.5 border-b border-slate-100">
+              <div class="flex items-center space-x-2">
+                <span class="p-1 bg-rose-50 text-rose-600 rounded-lg">
+                  <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+                </span>
+                <span id="lbl-flowBadLabel" class="font-bold text-slate-800 text-sm">
+                  Spam Tin Nhắn Tuyệt Vọng (Tự hại tâm lý)
+                </span>
+              </div>
+              <div class="flex items-center space-x-1.5 text-xs text-slate-500 bg-slate-50 px-2.5 py-1 rounded-full border border-slate-100 font-mono">
+                <i data-lucide="clock" class="w-3.5 h-3.5 text-slate-400"></i>
+                <span><span id="lbl-timer-elapsed">Thời gian:</span> <strong id="timer-bad" class="text-rose-500 font-bold">0h</strong></span>
+              </div>
+            </div>
+
+            <!-- Messages Box -->
+            <div class="flex-1 overflow-y-auto py-4 space-y-3.5 flex flex-col justify-end min-h-0" id="messages-bad-container">
+              <div id="messages-bad-placeholder" class="text-center my-auto text-slate-400 text-xs font-sans">
+                Đang chờ bắt đầu mô phỏng...
+              </div>
+              <!-- Simulated messages append here -->
+            </div>
+
+            <!-- Bottom Control Panel -->
+            <div class="pt-3.5 border-t border-slate-100 flex space-x-2">
+              <button 
+                id="btn-play-bad" 
+                onclick="startBadSimulation()" 
+                class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-semibold py-2.5 px-4 rounded-xl text-xs sm:text-sm shadow-sm hover:shadow transition-all cursor-pointer flex items-center justify-center space-x-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <i data-lucide="play" class="w-4 h-4"></i>
+                <span id="btn-startSimBtn-bad">Bắt đầu mô phỏng</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- GOOD FLOW -->
+          <div class="bg-white border border-slate-200/80 rounded-3xl p-5 shadow-sm flex flex-col h-[520px] transition-all relative overflow-hidden">
+            <!-- Header status bar -->
+            <div class="flex items-center justify-between pb-3.5 border-b border-slate-100">
+              <div class="flex items-center space-x-2">
+                <span class="p-1 bg-emerald-50 text-emerald-600 rounded-lg">
+                  <i data-lucide="check-circle" class="w-4 h-4"></i>
+                </span>
+                <span id="lbl-flowGoodLabel" class="font-bold text-slate-800 text-sm">
+                  Gửi Tin Nhắn Closure & Bước Tiếp (Khí chất)
+                </span>
+              </div>
+              <div class="flex items-center space-x-1.5 text-xs text-slate-500 bg-slate-50 px-2.5 py-1 rounded-full border border-slate-100 font-mono">
+                <i data-lucide="clock" class="w-3.5 h-3.5 text-slate-400"></i>
+                <span><span id="lbl-timer-elapsed-good">Thời gian:</span> <strong id="timer-good" class="text-emerald-500 font-bold">0h</strong></span>
+              </div>
+            </div>
+
+            <!-- Messages Box -->
+            <div class="flex-1 overflow-y-auto py-4 space-y-3.5 flex flex-col justify-end min-h-0" id="messages-good-container">
+              <div id="messages-good-placeholder" class="text-center my-auto text-slate-400 text-xs font-sans">
+                Đang chờ bắt đầu mô phỏng...
+              </div>
+              <!-- Simulated messages append here -->
+            </div>
+
+            <!-- Bottom Control Panel -->
+            <div class="pt-3.5 border-t border-slate-100 flex space-x-2">
+              <button 
+                id="btn-play-good" 
+                onclick="startGoodSimulation()" 
+                class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 px-4 rounded-xl text-xs sm:text-sm shadow-sm hover:shadow transition-all cursor-pointer flex items-center justify-center space-x-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <i data-lucide="play" class="w-4 h-4"></i>
+                <span id="btn-startSimBtn-good">Bắt đầu mô phỏng</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Global Reset Button -->
+        <div class="flex justify-center mt-6">
+          <button 
+            id="btn-reset-sim" 
+            onclick="resetAllSimulations()" 
+            class="flex items-center space-x-2 text-xs font-semibold text-slate-500 hover:text-slate-800 bg-white border border-slate-200/80 px-4 py-2 rounded-xl shadow-sm transition-all hover:bg-slate-50 cursor-pointer"
+          >
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span id="txt-resetSimBtn">Đặt lại mô phỏng</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- FAQ SECTION (Q-A) -->
+      <section class="max-w-3xl mx-auto space-y-8">
+        <div class="text-center space-y-2">
+          <h2 id="txt-faqTitle" class="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
+            Q-A
+          </h2>
+          <p id="txt-faqDesc" class="text-slate-500 text-sm max-w-md mx-auto leading-relaxed font-sans">
+            Các thắc mắc phổ biến về việc kiểm tra trạng thái bị ẩn tin nhắn và giải tỏa tâm lý lo âu.
+          </p>
+        </div>
+
+        <div id="faq-list-container" class="space-y-4">
+          <!-- Rendered via JS dynamically -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-100 mt-20 py-10 text-center text-xs text-slate-400">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <div class="flex items-center justify-center space-x-2.5">
+          <span class="font-extrabold text-slate-700 font-sans tracking-tight text-sm">
+            Ghost
+          </span>
+          <span class="text-slate-200">|</span>
+          <span class="font-medium">© 2026 Project saygex69</span>
+        </div>
+        <p id="txt-footerNote" class="max-w-xl mx-auto leading-relaxed font-sans">
+          Dự án này dựa trên nohello.net và nguồn ở ngoài nên có gì sai sót thì feedback qua mail me@sonk.site
+        </p>
+      </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT -->
+    <script>
+      // Translations Dictionary
+      const translations = {
+        vi: {
+          tagHero: "Cẩm nang giao tiếp lịch sự",
+          heroTitle: "Ghosting & Đọc đéo trả lời tin nhắn",
+          heroSubtitle: "Bạn bị im lặng không một lý do? Đừng hoảng loạn hay đánh mất lòng tự tôn. Hãy ứng xử văn minh, khôn ngoan để làm chủ tâm lý của chính mình!",
+          bannerNotice: "Website này chỉ tham khảo, có thể không chính xác 100%!",
+          aboutTitle: "Ghosting là gì?",
+          aboutText: "Ghosting là hành vi một người đột ngột cắt đứt mọi liên lạc (không trả lời tin nhắn, seen không rep, tắt trạng thái hoạt động hoặc âm thầm 'bỏ qua' cuộc trò chuyện) mà không đưa ra bất kỳ lý do hay lời giải thích nào. Hành vi này phản ánh sự thiếu trưởng thành trong kỹ năng giao tiếp và né tránh cảm xúc của đối phương, chứ không hề phản ánh giá trị bản thân của bạn.",
+          whyBadTitle: "Tại sao bị bơ tin nhắn lại gây lo âu cực độ?",
+          whyBadPoints: [
+            "Kích hoạt tâm lý tự trách bản thân, liên tục suy diễn xem mình đã làm sai điều gì.",
+            "Dễ đưa bạn vào 'bẫy' nhắn tin dồn dập (double-texting) làm giảm sút lòng tự trọng.",
+            "Việc thiếu lời kết rõ ràng (closure) khiến tâm trí bị dằn vặt và khó lòng bước tiếp."
+          ],
+          analogyTitle: "Phép so sánh",
+          analogyDesc: "Bơ tin nhắn cũng giống như việc ai đó đóng sầm cửa lại trước mặt bạn. Việc bạn tiếp tục đứng ngoài đập cửa, réo gọi chỉ làm bạn thêm mệt mỏi và biến bạn thành kẻ làm phiền. Quy tắc vàng khi bị ghosting là: Gõ cửa 1-2 lần lịch sự. Nếu họ không mở, hãy mỉm cười và kiêu hãnh quay lưng bước đi.",
+          comparisonBadge: "Mô phỏng thực tế",
+          comparisonTitle: "Phản ứng: Spam Tuyệt Vọng vs. Closure Lịch Lãm",
+          comparisonDesc: "Hãy mô phỏng và so sánh sự khác biệt lớn về tinh thần và vị thế của bạn sau 24 giờ bị đối phương 'Seen không rep'.",
+          flowBadLabel: "Spam Tin Nhắn Tuyệt Vọng (Tự hại tâm lý)",
+          flowGoodLabel: "Gửi Tin Nhắn Closure & Bước Tiếp (Khí chất)",
+          timerElapsed: "Thời gian:",
+          timerElapsedGood: "Thời gian:",
+          chatStatusActive: "Thời gian trôi qua",
+          chatStatusWaiting: "Đang chờ bắt đầu mô phỏng...",
+          startSimBtn: "Bắt đầu mô phỏng",
+          resetSimBtn: "Đặt lại mô phỏng",
+          faqTitle: "Q-A",
+          faqDesc: "Các thắc mắc phổ biến về việc kiểm tra trạng thái bị ẩn tin nhắn và giải tỏa tâm lý lo âu.",
+          faqs: [
+            {
+              q: "Làm sao biết mình có bị ẩn tin nhắn hay hạn chế không?",
+              a: "Nếu bạn gửi tin nhắn mà chỉ hiện vòng tròn tích xám (đã gửi nhưng không nhận), trong khi đối phương vẫn bật chấm xanh hoạt động, hoặc bạn không nhìn thấy trạng thái online của họ nữa dù trước đây vẫn thấy, rất có thể bạn đã bị đưa vào danh sách Hạn chế (Restrict) hoặc Bỏ qua tin nhắn."
+            },
+            {
+              q: "Quy tắc vàng khi bị bơ tin nhắn trong tình yêu là gì?",
+              a: "Có 3 quy tắc cốt lõi: 1. Đừng tự trách mình (hành vi của họ nói lên kỹ năng sống của họ, không phải giá trị của bạn). 2. Đặt giới hạn thời gian (sau 24h - 48h im lặng, hãy ngừng trông chờ). 3. Tuyệt đối không spam tin nhắn dồn dập hoặc gọi điện liên tục vì điều này chỉ hạ thấp lòng tự trọng của bạn."
+            },
+            {
+              q: "Khi nào nên gửi tin nhắn Closure?",
+              a: "Nếu mối quan hệ đã sâu đậm, một tin nhắn Closure lịch sự, ngắn gọn và dứt khoát ('Mình thấy chúng ta không còn tìm được tiếng nói chung nữa. Chúc bạn mọi điều tốt đẹp!') sẽ giúp bạn đóng lại nút thắt tâm lý để bước tiếp thanh thản, thay vì ấm ức kéo dài."
+            }
+          ],
+          footerNote: "Dự án này dựa trên nohello.net và nguồn ở ngoài nên có gì sai sót thì feedback qua mail me@sonk.site"
+        },
+        en: {
+          tagHero: "Elegant Communication Guide",
+          heroTitle: "Ghosting & Being Ignored",
+          heroSubtitle: "Were you suddenly met with silence? Don't panic or lose your self-worth. Learn how to respond with absolute grace, wisdom, and dignity!",
+          bannerNotice: "This website is for reference only, and may not be 100% accurate!",
+          aboutTitle: "What is Ghosting?",
+          aboutText: "Ghosting is when someone suddenly cuts off all communication (not replying, leaving you on 'Seen', muting or restricting your chat) without any explanation. This behavior reflects their own avoidance patterns and lack of communication maturity, rather than your personal value or worth.",
+          whyBadTitle: "Why does being ignored cause so much anxiety?",
+          whyBadPoints: [
+            "Triggers self-blame, forcing you to overthink what you might have done wrong.",
+            "Lures you into desperate double-texting which drains your dignity.",
+            "The lack of closure keeps your mind locked in endless speculation."
+          ],
+          analogyTitle: "Analogy",
+          analogyDesc: "Ignoring messages is like slamming a door in your face. Standing outside banging and shouting only exhausts you and makes them lock it tighter. The golden rule: Knock once or twice politely. If no one opens, smile and walk away with your head held high.",
+          comparisonBadge: "Real-time Simulation",
+          comparisonTitle: "Reaction: Desperate Spam vs. Elegant Closure",
+          comparisonDesc: "Simulate and compare the mental state and dignity levels 24 hours after being left on 'Seen'.",
+          flowBadLabel: "Desperate Spam (Self-harming psychology)",
+          flowGoodLabel: "Closure & Moving On (Dignified)",
+          timerElapsed: "Elapsed time:",
+          timerElapsedGood: "Elapsed time:",
+          chatStatusActive: "Time elapsed",
+          chatStatusWaiting: "Waiting to start simulation...",
+          startSimBtn: "Start Simulation",
+          resetSimBtn: "Reset Simulation",
+          faqTitle: "Q-A",
+          faqDesc: "Answers to common concerns about checking restriction status and handling emotional stress.",
+          faqs: [
+            {
+              q: "How do I know if I have been restricted or muted?",
+              a: "If you send a message and it stays as sent (unfilled gray checkmark) for days while they are clearly active elsewhere, or if you can no longer see their active status at all, they might have Restricted or muted your chat."
+            },
+            {
+              q: "What is the golden rule when being ignored?",
+              a: "First, stop blaming yourself; their silence is their issue, not yours. Second, set a time limit (after 24-48 hours, stop waiting). Lastly, never spam them with endless double-texts."
+            },
+            {
+              q: "When should I send a closure message?",
+              a: "For meaningful connections, sending a polite, brief, and absolute closure message ('It seems we are not on the same page anymore. Wishing you the best!') can help you mentally close the door and heal faster."
+            }
+          ],
+          footerNote: "This project is based on nohello.net and external sources. For any suggestions, please feedback via email me@sonk.site"
+        }
+      };
+
+      // App state
+      let currentLang = 'vi';
+      let badTimelineInterval = null;
+      let goodTimelineInterval = null;
+
+      // Simulated Dialogue Sequences
+      const badDialogue = [
+        { text: { vi: "Alo, nay rảnh không m", en: "Hey, free today?" }, time: "10:00", elapsed: "0h" },
+        { text: { vi: "Tí có đi chơi không mày", en: "Down to hang out in a bit?" }, time: "11:30", elapsed: "+1.5h" },
+        { text: { vi: "Ủa m định đéo rep tao à", en: "U gonna ignore me?" }, time: "14:00", elapsed: "+4h" },
+        { text: { vi: "Dcu m, đéo muốn rep thì block com mẹ đi, phiền vãi cả đái", en: "WTF, if u don't wanna reply just block me already, so annoying" }, time: "16:00", elapsed: "+6h" }
+      ];
+
+      const goodDialogue = [
+        { text: { vi: "Alo, tí rảnh lượn phố tí không m?", en: "Yo, down to ride around in a bit?" }, time: "10:00", elapsed: "0h" },
+        { text: { vi: "Thôi t đi với người khác rồi nhé, khi khác rảnh thì hú.", en: "Nvm went with someone else, catch u later." }, time: "18:00", elapsed: "+8h" }
+      ];
+
+      // Update UI texts on language switch
+      function setLanguage(lang) {
+        currentLang = lang;
+        
+        // Update language buttons toggle state
+        const btnVi = document.getElementById('btn-lang-vi');
+        const btnEn = document.getElementById('btn-lang-en');
+        if (lang === 'vi') {
+          btnVi.className = "px-3 py-1 text-xs font-semibold rounded-lg transition-all bg-white text-slate-800 shadow-sm cursor-pointer";
+          btnEn.className = "px-3 py-1 text-xs font-semibold rounded-lg transition-all text-slate-500 hover:text-slate-800 cursor-pointer";
+        } else {
+          btnEn.className = "px-3 py-1 text-xs font-semibold rounded-lg transition-all bg-white text-slate-800 shadow-sm cursor-pointer";
+          btnVi.className = "px-3 py-1 text-xs font-semibold rounded-lg transition-all text-slate-500 hover:text-slate-800 cursor-pointer";
+        }
+
+        const dict = translations[lang];
+
+        // Replace basic text elements
+        document.getElementById('tag-hero').innerText = dict.tagHero;
+        document.getElementById('txt-heroTitle').innerText = dict.heroTitle;
+        document.getElementById('txt-heroSubtitle').innerText = dict.heroSubtitle;
+        document.getElementById('txt-bannerNotice').innerText = dict.bannerNotice;
+        document.getElementById('txt-aboutTitle').innerText = dict.aboutTitle;
+        document.getElementById('txt-aboutText').innerText = dict.aboutText;
+        document.getElementById('txt-whyBadTitle').innerText = dict.whyBadTitle;
+        document.getElementById('txt-analogyTitle').innerText = dict.analogyTitle;
+        document.getElementById('txt-analogyDesc').innerText = dict.analogyDesc;
+        
+        document.getElementById('txt-comparisonBadge').innerText = dict.comparisonBadge;
+        document.getElementById('txt-comparisonTitle').innerText = dict.comparisonTitle;
+        document.getElementById('txt-comparisonDesc').innerText = dict.comparisonDesc;
+
+        document.getElementById('lbl-flowBadLabel').innerText = dict.flowBadLabel;
+        document.getElementById('lbl-flowGoodLabel').innerText = dict.flowGoodLabel;
+        document.getElementById('lbl-timer-elapsed').innerText = dict.timerElapsed;
+        document.getElementById('lbl-timer-elapsed-good').innerText = dict.timerElapsedGood;
+
+        document.getElementById('btn-startSimBtn-bad').innerText = dict.startSimBtn;
+        document.getElementById('btn-startSimBtn-good').innerText = dict.startSimBtn;
+        document.getElementById('txt-resetSimBtn').innerText = dict.resetSimBtn;
+
+        document.getElementById('txt-faqTitle').innerText = dict.faqTitle;
+        document.getElementById('txt-faqDesc').innerText = dict.faqDesc;
+        document.getElementById('txt-footerNote').innerText = dict.footerNote;
+
+        // Render points lists
+        const listWhy = document.getElementById('list-whyBadPoints');
+        listWhy.innerHTML = '';
+        dict.whyBadPoints.forEach(point => {
+          const li = document.createElement('li');
+          li.className = "flex items-start space-x-2.5 text-sm text-slate-500 leading-relaxed";
+          li.innerHTML = `<span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-rose-400 shrink-0"></span><span>${point}</span>`;
+          listWhy.appendChild(li);
+        });
+
+        // Re-render FAQs
+        renderFaqs(dict.faqs);
+
+        // Reset and clear simulators when language is switched to prevent mismatched dialogue language
+        resetAllSimulations();
+      }
+
+      // Render FAQs with smooth Accordion triggers
+      function renderFaqs(faqs) {
+        const container = document.getElementById('faq-list-container');
+        container.innerHTML = '';
+        faqs.forEach((faq, index) => {
+          const item = document.createElement('div');
+          item.className = "bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden transition-all duration-300";
+          item.innerHTML = `
+            <button onclick="toggleFaq(${index})" class="w-full flex items-center justify-between p-5 text-left font-semibold text-slate-800 text-sm sm:text-base cursor-pointer hover:bg-slate-50/50 transition-all select-none">
+              <span>${faq.q}</span>
+              <i data-lucide="chevron-down" id="faq-icon-${index}" class="w-4 h-4 text-slate-400 transition-transform duration-300"></i>
+            </button>
+            <div id="faq-answer-${index}" class="hidden px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-500 leading-relaxed font-sans border-t border-slate-50/80 animate-fade-in-up">
+              ${faq.a}
+            </div>
+          `;
+          container.appendChild(item);
+        });
+        lucide.createIcons();
+      }
+
+      // Toggle smooth FAQ slide
+      function toggleFaq(index) {
+        const answer = document.getElementById(`faq-answer-${index}`);
+        const icon = document.getElementById(`faq-icon-${index}`);
+        if (answer.classList.contains('hidden')) {
+          answer.classList.remove('hidden');
+          icon.style.transform = 'rotate(180deg)';
+        } else {
+          answer.classList.add('hidden');
+          icon.style.transform = 'rotate(0deg)';
+        }
+      }
+
+      // Create Typing Indicator bubble
+      function createTypingBubble(color) {
+        const div = document.createElement('div');
+        div.id = 'typing-indicator';
+        div.className = `flex items-center space-x-1 ml-auto bg-${color}-50 px-3.5 py-2.5 rounded-2xl rounded-tr-none max-w-[60%] shadow-sm self-end`;
+        div.innerHTML = `
+          <div class="flex space-x-1 py-1">
+            <span class="w-1.5 h-1.5 bg-${color}-400 rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+            <span class="w-1.5 h-1.5 bg-${color}-400 rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+            <span class="w-1.5 h-1.5 bg-${color}-400 rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+          </div>
+        `;
+        return div;
+      }
+
+      // Create Message Bubble
+      function createMessageBubble(text, time, color) {
+        const wrapper = document.createElement('div');
+        wrapper.className = "flex flex-col items-end max-w-[85%] ml-auto animate-fade-in-up self-end";
+        wrapper.innerHTML = `
+          <div class="px-4 py-2.5 rounded-2xl text-xs sm:text-sm bg-${color}-600 text-white rounded-tr-none shadow-sm leading-relaxed">
+            ${text}
+          </div>
+          <span class="text-[10px] text-slate-400 mt-1 px-1 font-mono">${time}</span>
+        `;
+        return wrapper;
+      }
+
+      // Start Bad Simulation (Spam sequence)
+      function startBadSimulation() {
+        const container = document.getElementById('messages-bad-container');
+        const placeholder = document.getElementById('messages-bad-placeholder');
+        const timerBad = document.getElementById('timer-bad');
+        const playBtn = document.getElementById('btn-play-bad');
+
+        playBtn.disabled = true;
+        if (placeholder) placeholder.style.display = 'none';
+
+        let currentIndex = 0;
+
+        function showNextMessage() {
+          if (currentIndex < badDialogue.length) {
+            // Append Typing Indicator
+            const indicator = createTypingBubble('rose');
+            container.appendChild(indicator);
+            container.scrollTop = container.scrollHeight;
+
+            // Wait 1.2s then replace typing indicator with actual message
+            setTimeout(() => {
+              if (indicator && indicator.parentNode) indicator.parentNode.removeChild(indicator);
+              
+              const currentData = badDialogue[currentIndex];
+              const bubble = createMessageBubble(currentData.text[currentLang], currentData.time, 'rose');
+              container.appendChild(bubble);
+              timerBad.innerText = currentData.elapsed;
+              container.scrollTop = container.scrollHeight;
+
+              currentIndex++;
+              // Delay before trigger next message
+              setTimeout(showNextMessage, 1800);
+            }, 1200);
+          } else {
+            // End simulation sequence
+            playBtn.disabled = true;
+          }
+        }
+
+        showNextMessage();
+      }
+
+      // Start Good Simulation (Closure sequence)
+      function startGoodSimulation() {
+        const container = document.getElementById('messages-good-container');
+        const placeholder = document.getElementById('messages-good-placeholder');
+        const timerGood = document.getElementById('timer-good');
+        const playBtn = document.getElementById('btn-play-good');
+
+        playBtn.disabled = true;
+        if (placeholder) placeholder.style.display = 'none';
+
+        let currentIndex = 0;
+
+        function showNextMessage() {
+          if (currentIndex < goodDialogue.length) {
+            // Append Typing Indicator
+            const indicator = createTypingBubble('emerald');
+            container.appendChild(indicator);
+            container.scrollTop = container.scrollHeight;
+
+            // Wait 1.2s then replace typing indicator with actual message
+            setTimeout(() => {
+              if (indicator && indicator.parentNode) indicator.parentNode.removeChild(indicator);
+
+              const currentData = goodDialogue[currentIndex];
+              const bubble = createMessageBubble(currentData.text[currentLang], currentData.time, 'emerald');
+              container.appendChild(bubble);
+              timerGood.innerText = currentData.elapsed;
+              container.scrollTop = container.scrollHeight;
+
+              currentIndex++;
+              // Delay before trigger next message
+              setTimeout(showNextMessage, 2000);
+            }, 1200);
+          } else {
+            // End simulation sequence
+            playBtn.disabled = true;
+          }
+        }
+
+        showNextMessage();
+      }
+
+      // Reset both simulators completely
+      function resetAllSimulations() {
+        // Clear containers and reset timer labels
+        const containerBad = document.getElementById('messages-bad-container');
+        const containerGood = document.getElementById('messages-good-container');
+
+        const badTitleWaiting = translations[currentLang].chatStatusWaiting;
+
+        containerBad.innerHTML = `<div id="messages-bad-placeholder" class="text-center my-auto text-slate-400 text-xs font-sans">${badTitleWaiting}</div>`;
+        containerGood.innerHTML = `<div id="messages-good-placeholder" class="text-center my-auto text-slate-400 text-xs font-sans">${badTitleWaiting}</div>`;
+
+        document.getElementById('timer-bad').innerText = '0h';
+        document.getElementById('timer-good').innerText = '0h';
+
+        document.getElementById('btn-play-bad').disabled = false;
+        document.getElementById('btn-play-good').disabled = false;
+      }
+
+      // Boot application
+      window.addEventListener('DOMContentLoaded', () => {
+        setLanguage('vi');
+        lucide.createIcons();
+      });
+    </script>
+  </body>
+</html>
